@@ -45,32 +45,6 @@ exports.loginController = async(req,res)=>{
     }   
 }
 
-// all users list view
-// exports.userViewController = async (req,res) => {
-//     try{
-//         const allUser =await users.find()
-
-//         res.status(200).json(allUser.map(user=>({Firstname:user.firstname, Email:user.email})))
-//     }catch(err){
-//         console.log(err);
-//     }
-// }
-
-// view user details 
-// exports.viewUserDetailsController = async(req,res)=>{
-//     const email =req.body.email
-//     try{
-//         const userDetails = await users.find({email})
-        
-//         if(userDetails){
-//             res.status(200).json(userDetails.map(details=>({Firstname:details.firstname, lastname:details.lastname, email:details.email, phoneNumber:details.phone})))
-//         }else{
-//             res.status(404).json("User Not found...")
-//         }
-//     }catch(err){
-//         console.log(err);
-//     }
-// }
 
 // profile updation of user
 exports.editUserController = async (req,res)=>{
