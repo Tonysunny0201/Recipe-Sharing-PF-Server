@@ -32,7 +32,8 @@ exports.allRecipeController = async (req,res)=>{
     }
     try {
         const allRecipes = await recipes.find(query)
-        res.status(200).json(allRecipes)
+        const validproducts = allRecipes.filter(item => item.status == "Approved");
+        res.status(200).json(validproducts)
     } catch (err) {
         res.status(401).json(err)
     }
@@ -81,3 +82,31 @@ exports.removeRecipeController = async (req,res)=>{
     
 }
 
+// get all recipes - needs authorisation..
+exports.getAllRecipeController = async (req,res)=>{
+    console.log("inside getAllRecipeController");
+    try {
+        const allRecipes = await recipes.find()
+        res.status(200).json(allRecipes)
+    } catch (err) {
+        res.status(401).json(err)
+    }
+}
+
+// recipe status update 
+exports.updateRecipeStatusController = async (req,res)=>{
+    console.log("inside updateRecipeStatusController");
+    // get recipe id from url parameter
+    const {id} = req.params
+    // get status of recipe from url query
+    const status = req.query.status
+    // update status of recipe with given id
+    try{
+        const existingRecipe = await recipes.findById({_id:id})
+        existingRecipe.status = status
+        await existingRecipe.save()
+        res.status(200).json(existingRecipe)
+    }catch(err){
+        res.status(401).json(err)
+    }  
+}

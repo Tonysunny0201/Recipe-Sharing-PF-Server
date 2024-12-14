@@ -41,4 +41,11 @@ router.get('/user-bookmarks', jwtMiddleware, bookmarkController.getBookmarksCont
 // Remove bookmark: http://localhost:3000/bookmark/:id/remove
 router.delete('/bookmark/:id/remove', jwtMiddleware, bookmarkController.removeBookmarkController);
 
+// get all recipe for admin
+router.get('/admin-recipe',jwtMiddleware,recipeController.getAllRecipeController)
+
+// update recipe status
+router.get("/recipe/:id/update",jwtMiddleware,recipeController.updateRecipeStatusController)
+
+
 module.exports = router;
